@@ -1,0 +1,38 @@
+server:
+  port: 8765
+
+spring:
+  application:
+    name: gateway-server
+    
+info:
+  component: Edge Server
+  
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+zuul:
+  prefix: /stiggley
+  routes:
+    users: 
+      path: /users/**
+      serviceId: stiggley-user
+ribbon:
+  eureka:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: false
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
